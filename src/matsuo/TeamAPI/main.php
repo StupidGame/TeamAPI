@@ -16,7 +16,7 @@ class main extends PluginBase implements Listener{
     $$teamname = [];
     $$teamname = "$playername"
     $teams = [];
-    $teams = "$$teamname"
+    $teams = "${$teamname}"
   }
   public function leaveteam($teamname, $player){
     $playername = $player->getname()
