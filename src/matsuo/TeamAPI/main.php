@@ -1,5 +1,6 @@
 <?php
-namespace matsuo\TeamAPI
+
+namespace matsuo\TeamAPI;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -17,16 +18,21 @@ class main extends PluginBase implements Listener{
     $teams = [];
     $teams = "$$teamname"
   }
-  public function jointeam($player){ 
-  
+  public function leaveteam($teamname, $player){
+    $playername = $player->getname()
+    foreach($$teamname as $value){
+      if(($key = array_search($playername, $$teamname)) !== false) {
+        unset($$teamname[$key]);
+    } 
+    }
+    unset($key);
   }
   
   
-  
-  public function onDamage(EntityDamageByEntityEvent $event)
+  public function onDamage(EntityDamageByEntityEvent $eventa)
   {
-    $atker = $event->getDamager();
-    $hiter = $event->getEntity();
+    $atker = $eventa->getDamager();
+    $hiter = $eventa->getEntity();
     if($atker instanceof Player && $hiter instanceof Player) {
       foreach($teams as $team) {
         if (in_array([$atker->getName(),$hiter->getName()],$team) {
@@ -36,15 +42,19 @@ class main extends PluginBase implements Listener{
     }
   }
 
+public function onchat(PlayerChatEvent $eventb){
   $recipients = [];
-/** @var PlayerChatEvent $event */
-foreach($event->getRecipients() as $recipient){
-  if(!$recipient instanceof Player) continue;
-  if(/** code... */){ //チャットの送信者と同じチームか確認
-    $recipients[] = $recipient;
+  /** @var PlayerChatEvent $event */
+  foreach($eventb->getRecipients() as $recipient){
+    if(!$recipient instanceof Player) continue;
+    if(/** code... */){ //チャットの送信者と同じチームか確認
+      $recipients[] = $recipient;
+    }
   }
-}
-$event->setRecipients($recipients);
+  $event->setRecipients($recipients);
+  }
+  
+  
 }
 
-?>
+?>  
