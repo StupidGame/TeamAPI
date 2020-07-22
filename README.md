@@ -4,10 +4,10 @@
 
 now coding...
 
-SPECIAL THANKS
-WhiteGrouseさん
-rain1208さん
-らっしゅさん
+SPECIAL THANKS  
+WhiteGrouseさん  
+rain1208さん  
+らっしゅさん  
 
 
 **問題点等あればお気軽にプルリクして頂けると助かります。**
