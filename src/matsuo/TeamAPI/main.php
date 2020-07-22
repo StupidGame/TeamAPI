@@ -38,7 +38,7 @@ class main extends PluginBase implements Listener {
   public function sameTeam($playerA, $playerB): bool {
     $nameA = $playerA->getName();
     $nameB = $playerB->getName();
-    foreach($this->teams => $teamName as $members) {
+    foreach($this->teams as $teamName => $members) {
       if(in_array($nameA, $members) && in_array($nameB, $members)) {
         return true;
       }
