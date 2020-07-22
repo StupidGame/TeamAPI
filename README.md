@@ -4,4 +4,8 @@
 
 now coding...
 
+SPECIAL THANKS
+WhiteGrouseさん
+
+
 **問題点等あればお気軽にプルリクして頂けると助かります。**
