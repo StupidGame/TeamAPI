@@ -1,62 +1,75 @@
 <?php
-
 namespace matsuo\TeamAPI;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\event\player\EntityDamageByEntityEvent;
 use pocketmine\event\player\PlayerChatEvent;
+use pocketmine\Player;
 
-class main extends PluginBase implements Listener{
+class main extends PluginBase implements Listener {
 
- 
+  private $teams = [];
 
-  public function jointeam($teamname, $player){  
-    $playername = $player->getname();
-    ${$teamname} = [];
-    $$teamname = "$playername";
-    $teams = [];
-    $teams = "${$teamname}";
+  public function joinTeam(string $teamName, Player $player) {
+    $playerName = $player->getName();
+    $members = [];
+    $members[] = $playerName;
+    $this->teams[$teamName] = $members;
   }
-  public function leaveteam($teamname, $player){
-    $playername = $player->getname();
-    foreach($$teamname as $value){
-      if(($key = array_search($playername, $$teamname)) !== false) {
-        unset($$teamname[$key]);
-    } 
+
+  public function leaveTeam(string $teamName, Player $player) {
+    $playerName = $player->getName();
+    if(($key = array_search($playerName, $this->teams[$teamName])) !== false) {
+      unset($this->teams[$teamName][$key]);
     }
-    unset($key);
   }
-  
-  
-  public function onDamage(EntityDamageByEntityEvent $eventa)
-  {
-    $atker = $eventa->getDamager();
-    $hiter = $eventa->getEntity();
-    if($atker instanceof Player && $hiter instanceof Player) {
-      foreach($teams as $team) {
-        if (in_array([$atker->getName(),$hiter->getName()],$team) {
-          $event->setCancelled();
-        }
+
+  public function getTeam(Player $player) {
+    $name = $player->getName();
+    foreach($this->teams => $teamName as $members) {
+      if(in_array($name, $members)) {
+        return ["team" => $teamName, "members" => $members];
       }
     }
+    return false;
   }
 
-public function onchat(PlayerChatEvent $eventb){
-  $recipients = [];
-  /** @var PlayerChatEvent $event */
-  foreach($eventb->getRecipients() as $recipient){
-    if(!$recipient instanceof Player) continue;
-    if(/** code... */){ //チャットの送信者と同じチームか確認
-      $recipients[] = $recipient;
+  public function sameTeam($playerA, $playerB): bool {
+    $nameA = $playerA->getName();
+    $nameB = $playerB->getName();
+    foreach($this->teams => $teamName as $members) {
+      if(in_array($nameA, $members) && in_array($nameB, $members)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public function onEnable() {
+    $this->getServer()->getPluginManager()->registerEvents($this, $this);
+  }
+
+  public function onDamage(EntityDamageByEntityEvent $event) {
+    $atker = $event->getDamager();
+    $hiter = $event->getEntity();
+    if($atker instanceof Player && $hiter instanceof Player && $this->sameTeam($atker, $hiter)) {
+      $event->setCancelled();
     }
   }
-  $event->setRecipients($recipients);
-  
-}
-  
-  
+
+  public function onChat(PlayerChatEvent $event) {
+    $sender = $event->getPlayer();
+    $recipients = [];
+    $teamInfo = $this->getTeam($sender);
+    if($teamInfo !== false) {
+      foreach($event->getRecipients() as $player) {
+        if(in_array($player->getName(), $teamInfo["members"])) {
+          $recipients[] = $player;
+        }
+      }
+      $event->setRecipients($recipients);//チームに所属してなかったらここはスルーされて全員に送信されちゃうから、仕様にあわせて変更して
+    }
+  }
 }
 
-
-?>  
