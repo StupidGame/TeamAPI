@@ -11,15 +11,15 @@ class main extends PluginBase implements Listener{
 
  
 
-  public function jointeam($teamname, $player){
-    $playername = $player->getname()
-    $$teamname = [];
-    $$teamname = "$playername"
+  public function jointeam($teamname, $player){  
+    $playername = $player->getname();
+    ${$teamname} = [];
+    $$teamname = "$playername";
     $teams = [];
-    $teams = "${$teamname}"
+    $teams = "${$teamname}";
   }
   public function leaveteam($teamname, $player){
-    $playername = $player->getname()
+    $playername = $player->getname();
     foreach($$teamname as $value){
       if(($key = array_search($playername, $$teamname)) !== false) {
         unset($$teamname[$key]);
@@ -52,9 +52,11 @@ public function onchat(PlayerChatEvent $eventb){
     }
   }
   $event->setRecipients($recipients);
-  }
+  
+}
   
   
 }
+
 
 ?>  
