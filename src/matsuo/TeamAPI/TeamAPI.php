@@ -7,7 +7,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\Player;
 
-class main extends PluginBase implements Listener {
+class API extends PluginBase implements Listener {
 
   private $teams = [];
 
