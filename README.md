@@ -3,7 +3,7 @@
 チャット非表示、フレンドリーファイア禁止機能標準搭載
 
 use文  
-```use matsuo\TeamAPI\main```
+```use matsuo\TeamAPI\TeamAPI```
 
 使える関数  
 $playerはプレイヤーオブジェクトとします  
