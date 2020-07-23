@@ -3,7 +3,7 @@ namespace matsuo\TeamAPI;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use pocketmine\event\player\EntityDamageByEntityEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\Player;
 
@@ -27,7 +27,7 @@ class main extends PluginBase implements Listener {
 
   public function getTeam(Player $player) {
     $name = $player->getName();
-    foreach($this->teams => $teamName as $members) {
+    foreach($this->teams as $teamName -> $members) {
       if(in_array($name, $members)) {
         return ["team" => $teamName, "members" => $members];
       }
