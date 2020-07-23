@@ -27,7 +27,7 @@ class main extends PluginBase implements Listener {
 
   public function getTeam(Player $player) {
     $name = $player->getName();
-    foreach($this->teams as $teamName -> $members) {
+    foreach($this->teams as $teamName => $members) {
       if(in_array($name, $members)) {
         return ["team" => $teamName, "members" => $members];
       }
