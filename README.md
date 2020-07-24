@@ -5,6 +5,9 @@
 use文  
 ```use matsuo\TeamAPI\TeamAPI```
 
+インスタンスの取得例
+```TeamAPI::getInstance()->jointeam($teamname, $player);```
+
 使える関数  
 $playerはプレイヤーオブジェクトとします  
 チームに参加する  
