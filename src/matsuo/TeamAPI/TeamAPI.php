@@ -5,6 +5,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\player\PlayerChatEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\Player;
 
 class TeamAPI extends PluginBase implements Listener {
@@ -65,6 +66,11 @@ class TeamAPI extends PluginBase implements Listener {
     if($atker instanceof Player && $hiter instanceof Player && $this->sameTeam($atker, $hiter)) {
       $event->setCancelled();
     }
+  }
+
+  public function onQuit(PlayerQuitEvent $event) {
+    $teamname = $this->getTeam($event->getName());
+    $this -> leaveTeam($teamname, $event->getname());
   }
 
   public function onChat(PlayerChatEvent $event) {
