@@ -9,6 +9,7 @@ use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\Player;
 
 class TeamAPI extends PluginBase implements Listener {
+  
   private static $instance = null;
   
   public static function getInstance(){
