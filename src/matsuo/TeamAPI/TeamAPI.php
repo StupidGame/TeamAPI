@@ -70,10 +70,10 @@ class TeamAPI extends PluginBase implements Listener {
   }
 
   public function onQuit(PlayerQuitEvent $event) {
+    $player = $event -> getPlayer();
     $teamname = $this->getTeam($event->getName());
-    $this -> leaveTeam($teamname, $event->getname());
+    $this -> leaveTeam($teamname, $player->getname());
   }
-
   public function onChat(PlayerChatEvent $event) {
     $sender = $event->getPlayer();
     $recipients = [];
