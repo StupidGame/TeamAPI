@@ -16,7 +16,7 @@ $playerはプレイヤーオブジェクトとします
 ```jointeam($teamname, $player)```  
 チームを抜ける  
 ```leaveteam($teamname, $player)```  
-チーム情報を取得する（戻り値は["team"=>チーム名,"member"=>メンバー]のような形の配列で帰ってきます）  
+チーム情報を取得する（戻り値は["team"=>チーム名,"members"=>メンバー]のような形の配列で帰ってきます）  
 ```getteam（$player）```  
 2人のプレイヤーが同じチームか確認する（返り値はbool型です）  
 ```sameteam($playera, $playerb)```  
